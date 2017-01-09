@@ -1,9 +1,9 @@
-makeChange :: Int -> Int -> Int
-makeChange _ 1 = 1
+makeChange :: Int -> [Int] -> Int
+makeChange _ [_] = 1
 makeChange 0 _ = 1
-makeChange n coin
-    | n - coin >=0 = makeChange (n - coin) coin + makeChange (n) (nextCoin coin)
-    | otherwise =  makeChange (n) (nextCoin coin)
+makeChange n (x:y:coins)
+    | n - x >=0 = makeChange (n - x) (x:y:coins) + makeChange (n) (y:coins)
+    | otherwise =  makeChange (n) (y:coins)
 
 nextCoin :: Int -> Int
 nextCoin coin
@@ -17,7 +17,7 @@ nextCoin coin
     | otherwise = 0
 
 main = do
-    print $ makeChange 200 200
+    print $ makeChange 200 [200,100,50,20,10,5,2,1]
 
 
 
